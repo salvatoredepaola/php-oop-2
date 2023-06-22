@@ -5,24 +5,21 @@ require __DIR__ . "/models/Cibo.php";
 require __DIR__ . "/models/Gioco.php";
 require __DIR__ . "/models/Cuccia.php";
 
-$cibo = new Cibo ("cibo", 9.99);
-$cibo->setCategoria("per cani");
-$cibo->setQuantita(80);
+$products = [
+    new Cibo ("cibo", 0,"per cani", 80),
+    new Gioco ("pallina", 5.99, "per cani", "gomma"),
+    new Cuccia("cuccia", 29.99, "per gatti", 40)
+];
 
-var_dump($cibo);
+// TUTTI I PRODOTTI SONO PUBBLICATI
 
-$pallina = new Gioco ("pallina", 5.99);
-$pallina->setCategoria("per gatti");
-$pallina->setMateriale("lana");
+foreach ($products as $product) {
+    $product->setPublish();
+}
 
-var_dump($pallina);
+// $products[0]->setUnPublish();
 
-$cuccia = new Cuccia("cuccia", 29.99);
-$cuccia->setTaglia(20);
-
-var_dump($cuccia);
-
-$prodotti = [$cibo, $pallina, $cuccia]
+// var_dump($products)
 
 ?>
 <!DOCTYPE html>
@@ -34,17 +31,33 @@ $prodotti = [$cibo, $pallina, $cuccia]
 </head>
 <body>
 
-    <?php foreach ($prodotti as $prodotto) { ?>
-        <h1>Nome prodotto <?= $prodotto->getName()?></h1>
-        <h3>Prezzo <?= $prodotto->getPrice() ?> </h3>
-        <h3>Categoria <?= $prodotto->getCategoria() ?></h3>
+    <?php foreach ($products as $product) { ?>
+
+        <!-- STAMPA SOLO I PRODOTTI PUBBLICATI -->
+
+        <?php if($product->getPublished()) { ?>
+
+
+        <h1>Nome prodotto <?= $product->getName()?></h1>
+        <h3>Prezzo: <?php 
+        try {
+           echo $product->getPrice();
+        } catch (Exception $e) {
+           echo "Prezzo non disponibile"; 
+        }
+        ?> 
+        </h3>
+        <h3>Categoria <?= $product->getCategoria() ?></h3>
         
-        <?php if ($prodotto instanceof Cibo) { ?>
-            <h3>Quantità: <?= $prodotto->getQuantita() ?></h3>
-        <?php } elseif ($prodotto instanceof Gioco) { ?>
-            <h3>Materiale: <?= $prodotto->getMateriale() ?></h3>
-        <?php } elseif ($prodotto instanceof Cuccia) { ?>
-            <h3>Taglia: <?= $prodotto->getTaglia() ?></h3>
+        <?php if ($product instanceof Cibo) { ?>
+            <h3>Quantità: <?= $product->getQuantita() ?></h3>
+        <?php } elseif ($product instanceof Gioco) { ?>
+            <h3>Materiale: <?= $product->getMateriale() ?></h3>
+        <?php } elseif ($product instanceof Cuccia) { ?>
+            <h3>Taglia: <?= $product->getTaglia() ?></h3>
+        <?php } ?>
+
+
         <?php } ?>
         
         

@@ -1,6 +1,9 @@
 <?php 
 
+require_once __DIR__ . "/../traits/Publishable.php";
 class Prodotto {
+
+    use Publishable;
 
     public $name;
     public $price;
@@ -21,6 +24,11 @@ class Prodotto {
     }
 
     public function getPrice() {
+
+        if ($this->price == 0 ) {
+            throw new Exception("prezzo non definito");
+        }
+
         return $this->price . "$";
     }
 
