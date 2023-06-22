@@ -6,13 +6,17 @@ class Prodotto {
     use Publishable;
 
     public $name;
+    public $img;
     public $price;
     public $categoria;
+
     
-    public function __construct($nome, $price)
+    public function __construct($nome, $img, $price)
     {
         $this->name = $nome;
+        $this->img = $img;
         $this->price = $price;
+
     }
 
     public function getName() {
@@ -21,6 +25,14 @@ class Prodotto {
 
     public function setName($name) {
         $this->name = $name;
+    }
+
+    public function getImg() {
+        return $this->img;
+    }
+
+    public function setImg($img) {
+        $this->img = $img;
     }
 
     public function getPrice() {

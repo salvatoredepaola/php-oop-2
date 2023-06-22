@@ -4,9 +4,10 @@ class Gioco extends Prodotto {
 
     private $materiale;
 
-    public function __construct($name, $price, $categoria = "per tutti", $materiale = null)
+    public function __construct($name, $img, $price, $categoria = "per tutti", $materiale = null)
     {
         $this->name = $name;
+        $this->img = $img;
         $this->price = $price;
         $this->categoria = $categoria;
 

@@ -4,9 +4,10 @@ class Cuccia extends Prodotto {
 
     private $taglia;
 
-    public function __construct($name, $price, $categoria = "per tutti", $taglia = 0)
+    public function __construct($name, $img, $price, $categoria = "per tutti", $taglia = 0)
     {
         $this->name = $name;
+        $this->img = $img;
         $this->price = $price;
         $this->categoria = $categoria;
 
